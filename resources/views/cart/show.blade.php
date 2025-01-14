@@ -14,6 +14,15 @@
             <li>
                 {{ $product->pivot->quantity }} x {{ $product->name }} - ${{ $product->pivot->quantity * $product->price }}
 
+                <td>
+                    <form method="POST" action="{{ route('cart.updateQuantity') }}">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="number" name="quantity" value="{{ $product->pivot->quantity }}" min="1">
+                        <button type="submit" class="btn btn-primary btn-sm">Update Quantity</button>
+                    </form>
+                </td>
+
                 <!-- Remove button -->
                 <form method="POST" action="{{ route('cart.removeProduct') }}" style="display: inline;">
                     @csrf

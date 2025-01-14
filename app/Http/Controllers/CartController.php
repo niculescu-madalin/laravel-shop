@@ -27,7 +27,6 @@ class CartController extends Controller
         return redirect()->route('cart.show')->with('success', 'Product added to wishlist!');
     }
 
-
     public function removeProduct(Request $request) {
         $cart = $request->user()->cart;
         $productId = $request->product_id;
@@ -41,5 +40,25 @@ class CartController extends Controller
 
         return redirect()->route('cart.show')->with('success', 'Product removed from wishlist!');
     }
+
+    public function updateQuantity(Request $request)
+    {
+        $user = $request->user();
+        $cart = $user->cart;
+        
+        $productId = $request->input('product_id');
+        $quantity = $request->input('quantity');
+        
+        if ($quantity <= 0) {
+            // Remove the product if quantity is zero or less
+            $cart->products()->detach($productId);
+        } else {
+            // Update the product quantity
+            $cart->products()->updateExistingPivot($productId, ['quantity' => $quantity]);
+        }
+    
+        return redirect()->route('cart.show')->with('success', 'Cart updated!');
+    }
+
 
 }

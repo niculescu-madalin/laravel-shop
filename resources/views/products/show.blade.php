@@ -71,7 +71,7 @@
         </div>
       </div>
     </div>
-@auth
+
 <form id="addToWishlist" method="POST" action="{{ route('wishlist.add') }}">
   @csrf
   <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -81,5 +81,5 @@
   @csrf
   <input type="hidden" name="product_id" value="{{ $product->id }}">
 </form>
-@endauth
+
 </x-app-layout>
