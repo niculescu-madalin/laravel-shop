@@ -12,7 +12,7 @@
         @else
             @foreach (Auth::user()->cart->products as $product)
             <li>
-                {{ $product->name }} - ${{ $product->price }}
+                {{ $product->pivot->quantity }} x {{ $product->name }} - ${{ $product->pivot->quantity * $product->price }}
 
                 <!-- Remove button -->
                 <form method="POST" action="{{ route('cart.removeProduct') }}" style="display: inline;">
