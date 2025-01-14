@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
 use App\Models\Product;
@@ -36,6 +37,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/wishlist/add', [WishlistController::class, 'addProduct'])->name('wishlist.add');
     Route::post('/wishlist/remove-product', [WishlistController::class, 'removeProduct'])->name('wishlist.removeProduct');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
+    Route::post('/cart/add', [CartController::class, 'addProduct'])->name('cart.add');
+    Route::post('/cart/remove-product', [CartController::class, 'removeProduct'])->name('cart.removeProduct');
+});
+
 
 // Route::delete('categories/{id}/delete', ['as' => 'categories.delete', 'uses' => 'App\Http\Controllers\CategoryController@destroy']);
 

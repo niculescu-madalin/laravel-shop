@@ -29,6 +29,9 @@
                     <x-nav-link href="/wishlist" :active="request()->is('wishlist')">
                         Wishlist
                     </x-nav-link>
+                    <x-nav-link href="/cart" :active="request()->is('cart')">
+                        Cart
+                    </x-nav-link>
                     @endif
                 </div>
             </div>

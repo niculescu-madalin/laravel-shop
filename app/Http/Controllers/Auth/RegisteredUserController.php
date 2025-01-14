@@ -13,6 +13,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
 use App\Models\Wishlist;
+use App\Models\Cart;
 
 class RegisteredUserController extends Controller
 {
@@ -45,6 +46,10 @@ class RegisteredUserController extends Controller
 
         Wishlist::create([
             'user_id' => $user->id,
+        ]);
+
+        Cart::create([
+            'user_id' => $user->id
         ]);
 
         event(new Registered($user));

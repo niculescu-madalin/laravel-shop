@@ -24,4 +24,10 @@ class Product extends Model
     public function wishlists() {
         return $this->belongsToMany(Wishlist::class, 'product_wishlist');
     }
+
+    public function carts() {
+        return $this->belongsToMany(Cart::class, 'cart_product')
+            ->withPivot('quantity')
+            ->withTimestamps();
+    }
 }

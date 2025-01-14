@@ -2,20 +2,20 @@
 <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                My Wishlist
+                My Cart
             </h2>
         </x-slot>
-        @if (Auth::user()->wishlist->products->isEmpty())
+        @if (Auth::user()->cart->products->isEmpty())
             <div class="lg:px-40 py-4 sm:px-6">
-                <span> Your wishlist is empty. </span>
+                <span> Your cart is empty. </span>
             </div>
         @else
-            @foreach (Auth::user()->wishlist->products as $product)
+            @foreach (Auth::user()->cart->products as $product)
             <li>
                 {{ $product->name }} - ${{ $product->price }}
 
                 <!-- Remove button -->
-                <form method="POST" action="{{ route('wishlist.removeProduct') }}" style="display: inline;">
+                <form method="POST" action="{{ route('cart.removeProduct') }}" style="display: inline;">
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                     <button type="submit" class="btn btn-danger btn-sm">Remove</button>

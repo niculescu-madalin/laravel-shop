@@ -10,15 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class WishlistController extends Controller
 {
-
-    public function index() {
-        # $wishlist = Auth::user()->wishlist->products;
-        # return view('wishlist.index', compact('wishlist'));
-    }
-
-    public function show(Wishlist $wishlist) {
-
-        return view('wishlist.show', ['wishlist' => $wishlist]);
+    public function show() {
+        return view('wishlist.show');
     }
 
     public function addProduct(Request $request) {
@@ -31,7 +24,7 @@ class WishlistController extends Controller
 
         $wishlist->products()->syncWithoutDetaching($productId);
        
-        return view('wishlist.show')->with('success', 'Product added to wishlist!');
+        return redirect()->route('wishlist.show')->with('success', 'Product added to wishlist!');
     }
 
 
