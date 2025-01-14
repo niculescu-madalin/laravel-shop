@@ -31,13 +31,10 @@ require __DIR__.'/auth.php';
 Route::resource('products', ProductController::class);
 Route::resource('categories', CategoryController::class);
 
-Route::get('/wishlist', [WishlistController::class, 'show']);
-    
-
 Route::middleware(['auth'])->group(function () {
-    # Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
-    Route::post('/wishlist/add', [WishlistController::class, 'add'])->name('wishlist.add');
-    Route::post('/wishlist/remove', [WishlistController::class, 'remove'])->name('wishlist.remove');
+    Route::get('/wishlist', [WishlistController::class, 'show'])->name('wishlist.show');
+    Route::post('/wishlist/add', [WishlistController::class, 'addProduct'])->name('wishlist.add');
+    Route::post('/wishlist/remove-product', [WishlistController::class, 'removeProduct'])->name('wishlist.removeProduct');
 });
 
 // Route::delete('categories/{id}/delete', ['as' => 'categories.delete', 'uses' => 'App\Http\Controllers\CategoryController@destroy']);

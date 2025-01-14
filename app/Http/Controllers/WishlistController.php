@@ -21,7 +21,7 @@ class WishlistController extends Controller
         return view('wishlist.show', ['wishlist' => $wishlist]);
     }
 
-    public function add(Request $request) {
+    public function addProduct(Request $request) {
         $wishlist = $request->user()->wishlist;
 
         $productId = $request->product_id;
@@ -29,23 +29,23 @@ class WishlistController extends Controller
             return redirect()->back()->withErrors(['product_id' => 'Product ID is required.']);
         }
 
-        $wishlist->products()->attach($productId);
-
+        $wishlist->products()->syncWithoutDetaching($productId);
        
         return view('wishlist.show')->with('success', 'Product added to wishlist!');
-
     }
 
 
-    public function remove(Request $request)
-    {
-        $wishlist =  $request->user()->wishlist;
-        $product = Product::findOrFail($request->product_id);
-
-        if ($wishlist) {
-            $wishlist->products()->detach($product);
+    public function removeProduct(Request $request) {
+        $wishlist = $request->user()->wishlist;
+        $productId = $request->product_id;
+        
+        if (!$productId) {
+            return redirect()->back()->withErrors(['product_id' => 'Product ID is required.']);
         }
 
-        return redirect()->back()->with('success', 'Product removed from wishlist!');
+        // Detach the product from the wishlist
+        $wishlist->products()->detach($productId);
+
+        return redirect()->route('wishlist.show')->with('success', 'Product removed from wishlist!');
     }
 }
