@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+use App\Models\Wishlist;
+
 class RegisteredUserController extends Controller
 {
     /**
@@ -41,10 +43,14 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        Wishlist::create([
+            'user_id' => $user->id,
+        ]);
+
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect('/products.index');
+        return redirect('/products');
     }
 }

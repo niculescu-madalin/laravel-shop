@@ -42,6 +42,8 @@
                 Add to Cart
             </button>
             <button
+              form="addToWishlist" 
+              type="submit"
               class="bg-gray-200 flex gap-2 items-center  text-gray-800 px-6 py-2 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                   stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -61,4 +63,11 @@
         </div>
       </div>
     </div>
+@auth
+<form id="addToWishlist" method="POST" action="{{ route('wishlist.add') }}">
+  @csrf
+  <input type="hidden" name="wishlist_id" value={{ Auth::user()->wishlist->id }}>
+  <input type="hidden" name="product_id" value="{{ $product->id }}">
+</form>
+@endauth
 </x-app-layout>

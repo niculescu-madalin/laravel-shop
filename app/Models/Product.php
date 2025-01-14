@@ -13,7 +13,15 @@ class Product extends Model
 
     protected  $guarded = [];
 
+    protected $fillable = [
+        'wishlist_id',
+    ];
+
     public function category() {
         return $this->belongsTo(Category::class);
+    }
+
+    public function wishlists() {
+        return $this->belongsToMany(Wishlist::class, 'product_wishlist');
     }
 }

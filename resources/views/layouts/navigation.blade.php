@@ -25,6 +25,11 @@
                     <x-nav-link href="/categories" :active="request()->is('categories')">
                         Categories
                     </x-nav-link>
+                    @if(Auth::check())
+                    <x-nav-link href="/wishlist" :active="request()->is('wishlist')">
+                        Wishlist
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -121,3 +126,4 @@
         @endif
     </div>
 </nav>
+

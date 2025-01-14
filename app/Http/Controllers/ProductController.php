@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
+
 
 
 
@@ -114,6 +116,8 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Product $product) {
+        Storage::disk('public')->delete($product->image_path);
+        
         $product->delete();
         return redirect('/products');
     }
