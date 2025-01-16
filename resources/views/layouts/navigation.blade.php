@@ -32,6 +32,9 @@
                     <x-nav-link href="/cart" :active="request()->is('cart')">
                         Cart
                     </x-nav-link>
+                    <x-nav-link href="/orders" :active="request()->is('orders')">
+                        Orders
+                    </x-nav-link>
                     @endif
                 </div>
             </div>
