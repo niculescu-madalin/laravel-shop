@@ -20,11 +20,22 @@ class CartController extends Controller
             return redirect()->back()->withErrors(['product_id' => 'Product ID is required.']);
         }
 
-        $cart->products()->syncWithoutDetaching([
-            $productId => ['quantity' => $quantity]
-        ]);
+        $existingProduct = $cart->products()->where('product_id', $productId)->first();
+
+
+        if ($existingProduct) {
+            // If the product exists, update the quantity
+            $newQuantity = $existingProduct->pivot->quantity + $quantity;
+            $cart->products()->updateExistingPivot($productId, ['quantity' => $newQuantity]);
+        } else {
+            // If the product is not in the cart, add it
+            $cart->products()->syncWithoutDetaching([
+                $productId => ['quantity' => $quantity]
+            ]);
+        }
        
-        return redirect()->route('cart.show')->with('success', 'Product added to wishlist!');
+        return redirect()->route('cart.show')->with('success', 'Product added to cart!');
+    
     }
 
     public function removeProduct(Request $request) {
