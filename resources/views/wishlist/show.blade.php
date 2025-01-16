@@ -19,7 +19,7 @@
                 <div class="w-1/12 aspect-square">
                     <img src="{{ $product->image_path }}">
                 </div>
-                <div class="w-8/12">
+                <div class="w-6/12">
                     <a href="/products/{{ $product->id }}" class="hover:underline">
                         <div class="font-semibold text-l text-gray-800 leading-tight grow">
                             {{ $product->name }}
