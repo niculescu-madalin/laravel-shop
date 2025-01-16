@@ -11,6 +11,9 @@
             <p><strong>Status:</strong> {{ ucfirst($order->status) }}</p>
             <p><strong>Total Price:</strong> ${{ number_format($order->total_price, 2) }}</p>
             <p><strong>Ordered At:</strong> {{ $order->ordered_at->format('Y-m-d H:i') }}</p>
+            <p><strong>Client:</strong> {{ ucfirst($order->user->name) }} ({{$order->user->email}}) </p>
+            <p><strong>Delivery Adress:</strong> {{ ucfirst($order->adresa_livrare) }}</p>
+            
 
             <h3 class="text-lg font-semibold mt-6 mb-4">Products</h3>
             <table class="table-auto w-full border-collapse border border-gray-300">

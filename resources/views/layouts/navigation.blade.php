@@ -17,6 +17,9 @@
                             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                                 {{ __('Dashboard') }}
                             </x-nav-link>
+                            <x-nav-link href="/orders/admin" :active="request()->is('orders/admin')">
+                                All Orders
+                            </x-nav-link>
                         @endif
                     @endif
                     <x-nav-link href="/products" :active="request()->is('/') || request()->is('products')">
@@ -26,15 +29,17 @@
                         Categories
                     </x-nav-link>
                     @if(Auth::check())
-                    <x-nav-link href="/wishlist" :active="request()->is('wishlist')">
-                        Wishlist
-                    </x-nav-link>
-                    <x-nav-link href="/cart" :active="request()->is('cart')">
-                        Cart
-                    </x-nav-link>
-                    <x-nav-link href="/orders" :active="request()->is('orders')">
-                        Orders
-                    </x-nav-link>
+                        @if(Auth::user()->role != "admin")
+                        <x-nav-link href="/wishlist" :active="request()->is('wishlist')">
+                            Wishlist
+                        </x-nav-link>
+                        <x-nav-link href="/cart" :active="request()->is('cart')">
+                            Cart
+                        </x-nav-link>
+                        <x-nav-link href="/orders" :active="request()->is('orders')">
+                            Orders
+                        </x-nav-link>
+                        @endif
                     @endif
                 </div>
             </div>

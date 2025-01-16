@@ -9,6 +9,12 @@ use App\Models\Product;
 
 class OrderController extends Controller
 {
+    public function adminIndex(Request $request)
+    {
+        $orders = Order::all();
+        // Return the view with the list of orders
+        return view('orders.index', compact('orders'));
+    }
 
     public function index(Request $request)
     {
@@ -25,7 +31,7 @@ class OrderController extends Controller
         $order = Order::with('products')->findOrFail($id);
 
         // Ensure the authenticated user owns the order
-        if ($order->user_id !== Auth::id()) {
+        if (($order->user_id !== Auth::id()) && (Auth::user()->role != "admin")) {
             abort(403, 'Unauthorized action.');
         }
 
