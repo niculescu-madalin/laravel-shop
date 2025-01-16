@@ -121,4 +121,21 @@ class ProductController extends Controller
         $product->delete();
         return redirect('/products');
     }
+
+    public function showWishlistStatus(Request $request) {
+        $user = $request->user();
+        $productId = $request->product_id;
+    
+        // Check if the product is already in the user's wishlist
+        $productInWishlist = $user->wishlist()->where('product_id', $productId)->exists();
+    
+        if ($productInWishlist) {
+            // Product is already wishlisted
+            return redirect()->route('wishlist.show')->with('info', 'This product is already in your wishlist!');
+        } else {
+            // Product is not in wishlist
+            return redirect()->route('wishlist.show')->with('success', 'This product has been added to your wishlist!');
+        }
+    }
+    
 }

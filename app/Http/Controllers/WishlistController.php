@@ -39,6 +39,6 @@ class WishlistController extends Controller
         // Detach the product from the wishlist
         $wishlist->products()->detach($productId);
 
-        return redirect()->route('wishlist.show')->with('success', 'Product removed from wishlist!');
+        return redirect()->back()->with('success', 'Product removed from wishlist!');
     }
 }

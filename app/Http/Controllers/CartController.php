@@ -22,7 +22,6 @@ class CartController extends Controller
 
         $existingProduct = $cart->products()->where('product_id', $productId)->first();
 
-
         if ($existingProduct) {
             // If the product exists, update the quantity
             $newQuantity = $existingProduct->pivot->quantity + $quantity;
