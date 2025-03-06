@@ -9,7 +9,6 @@
 
 <form class="px-40" method="POST" action="/products" enctype="multipart/form-data">
     @csrf
-
     <div class="space-y-12">
       <div class="border-b border-gray-900/10 pb-12">
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -136,12 +135,23 @@
           </div>
 
           <div class="sm:col-span-4">
+            <label for="image">Product Image:</label>
             <input type="file" name="image" id="image">
           </div>
 
           @error('image')
             <p class="ml-1 mt-1 text-xs text-red-500 font-semibold">{{ $message }}</p>
           @enderror
+
+          <div>
+            <label for="specs_file">Product Specifications (PDF/DOCX):</label>
+            <input type="file" name="specs_file" id="specs_file">
+          </div>
+
+          @error('specs_file')
+            <p class="ml-1 mt-1 text-xs text-red-500 font-semibold">{{ $message }}</p>
+          @enderror
+
           </div>  
         </div>
       </div>

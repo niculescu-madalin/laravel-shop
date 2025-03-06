@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 
 
@@ -44,21 +45,33 @@ class ProductController extends Controller
             'discount' => ['required'],
             'image' => 'required|image|mimes:jpeg,png,jpg,gif',
             'category_id' => 'required|exists:categories,id',
+            'specs_file' => 'required|file|mimes:pdf,doc,docx|max:5120',
         ]);
 
         // Store the file in storage\app\public folder
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
 
+        if($request->hasFile('image')) {
+            $imageFile = $request->file('image');
+            $imageFileName = time() . '_img.' . $imageFile->getClientOriginalExtension();
+            $imageFile->move(public_path('images'), $imageFileName);
+        }
+
+        if ($request->hasFile('specs_file')) {
+            $specsFile = $request->file('specs_file');
+            $specsFileName = time() . '_specs.' . $specsFile->getClientOriginalExtension();
+            $specsFile->move(public_path('specs'), $specsFileName);
+        }
+    
         Product::create([
+            'category_id' => $request->category_id,
             'name' => request('name'),
             'description' => request('description'),
             'specifications' => request('specifications'),
             'price' => request('price'),
             'amount' => request('amount'),
             'discount' => request('discount'),
-            'image_path' => 'images/'.$imageName,
-            'category_id' => $request->category_id,
+            'image_path' => 'images/'.$imageFileName,
+            'specs_file' =>'specs/'.$specsFileName
         ]);
     
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
@@ -116,10 +129,20 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Product $product) {
-        Storage::disk('public')->delete($product->image_path);
-        
+        // Delete the image file
+        if (File::exists(public_path($product->image_path))) {
+            File::delete(public_path($product->image_path));
+        }
+
+        // Delete the specs file (if it exists)
+        if ($product->specs_file && File::exists(public_path($product->specs_file))) {
+            File::delete(public_path($product->specs_file));
+        }
+
+        // Delete the product from the database
         $product->delete();
-        return redirect('/products');
+
+        return redirect()->route('products.index')->with('success', 'Product deleted successfully!');
     }
 
     public function showWishlistStatus(Request $request) {

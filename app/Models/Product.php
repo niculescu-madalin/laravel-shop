@@ -15,6 +15,15 @@ class Product extends Model
 
     protected $fillable = [
         'wishlist_id',
+        'name',
+        'price',
+        'description',
+        'specifications',
+        'amount',
+        'discount',
+        'category_id',
+        'image_path',
+        'specs_file',
     ];
 
     public function category() {
