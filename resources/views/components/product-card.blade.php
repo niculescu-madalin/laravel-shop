@@ -14,7 +14,8 @@
           {{-- <span class="text-sm text-slate-900 line-through">$699</span> --}}
         </p>
       </div>
-      <div class="flex gap-1">
+      <div class="flex flex-col gap-1">
+        <div class="flex gap-1">
         <form 
           class="w-full"
           id="addToCart-{{ $product->id }}" 
@@ -62,6 +63,7 @@
             @endif
           </button>
         </form>
+        </div>
             
         
         @if(Auth::check())
