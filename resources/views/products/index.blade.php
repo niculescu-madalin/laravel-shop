@@ -19,12 +19,25 @@
     </div>
     </x-slot>
 
-    <div class="gap-4 flex m-4">
-    @foreach ($products as $product)
-      <x-product-card :product="$product" />
-    @endforeach
-        <div>
-            {{ $products->links() }}
+    <div class="gap-3 flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 m-4">
+        {{-- <div class="p-1 h-fit block max-w-sm rounded-lg shadow-sm bg-gray-800 border-gray-700">
+            <h5 class="mx-6 my-4 text-2xl font-bold tracking-tight text-white">Categories</h5>
+            <div class="px-6 py-2 rounded hover:bg-gray-700 font-normal text-gray-300"> 
+               All products
+            </div>
+            @foreach ($categories as $category)
+                <div class="px-6 py-2 rounded hover:bg-gray-700 font-normal text-gray-300"> 
+                    {{ $category->name }}
+                </div>
+            @endforeach
+        </div> --}}
+        <div class="gap-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        @foreach ($products as $product)
+          <x-product-card :product="$product" />
+        @endforeach
+            <div>
+                {{ $products->links() }}
+            </div>
         </div>
     </div>
 </x-app-layout>

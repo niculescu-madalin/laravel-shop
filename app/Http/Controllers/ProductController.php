@@ -19,8 +19,10 @@ class ProductController extends Controller
      */
     public function index() {
         $products = Product::with('category')->latest()->simplePaginate(20);
+        $categories = Category::all();
         return view( 'products.index', [
-            'products' => $products
+            'products' => $products,
+            'categories' => $categories,
         ]);
     }
 

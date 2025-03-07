@@ -16,8 +16,8 @@
         <ul>
             @foreach (Auth::user()->wishlist->products as $product)
             <li class="sm:px-8 lg:px-40 py-4 border-b border-gray-200 items-center sm:flex sm:justify-between flex gap-x-3">
-                <div class="w-1/12 aspect-square">
-                    <img src="{{ $product->image_path }}">
+                <div class="w-1/12 aspect-square border-white border-4 ">
+                    <img class="" src="{{ $product->image_path }}">
                 </div>
                 <div class="w-6/12">
                     <a href="/products/{{ $product->id }}" class="hover:underline">
