@@ -37,7 +37,7 @@ class="relative"
     </form>
     
     <!-- Existing dropdown results -->
-    <div x-show="isOpen" class="absolute w-full mt-1 bg-white/50 backdrop-blur-xl border rounded-lg shadow-lg z-50 max-h-96 overflow-auto">
+    <div x-show="isOpen" class="absolute w-full mt-1 bg-white backdrop-blur-3xl border rounded-lg shadow-lg z-100 max-h-96 overflow-auto">
         <div class="boder-b">
             <template x-for="result in results" :key="result.id">
                 <a 

@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="shadow-sm sticky top-0 z-20 bg-white/80 backdrop-blur-2xl border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16 gap-8">
@@ -28,9 +28,6 @@
                     <x-nav-link href="/categories" :active="request()->is('categories')">
                         Categories
                     </x-nav-link>
-                    @if(Auth::check())
-                        
-                    @endif
                 </div>
             </div>
 
@@ -38,7 +35,7 @@
                 @include('components.search')
             </div>
 
-            <div class="gap-6 align-self-end hidden md:flex">
+            <div class="gap-6 align-self-end hidden sm:flex">
                 @auth
                 @if(Auth::user()->role != "admin")
                 <x-nav-link class="gap-1" href="/wishlist" :active="request()->is('wishlist')">
