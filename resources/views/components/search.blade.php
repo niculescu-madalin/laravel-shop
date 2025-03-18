@@ -1,6 +1,16 @@
+<div x-data="{ 
+    isOpen: false, 
+    results: [], 
+    searchTerm: '{{ request('q') }}' 
+}" 
+class="relative" 
+@click.away="isOpen = false"
+>
+
 <div x-data="{ isOpen: false, results: [] }" class="relative" @click.away="isOpen = false">
     <form method="GET" action="{{ route('search.results') }}">
-        <input 
+        <input
+            class="border-2 border-slate-400 rounded-lg px-4 py-2 w-full focus:shadow-lg" 
             type="text" 
             name="q"
             placeholder="Search products..."
@@ -19,7 +29,7 @@
                 }
             "
             @focus="searchTerm.length > 2 && (isOpen = true)"
-            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-10 focus:ring-slate-500"
         >
         
         <!-- Add a hidden submit button for accessibility -->
@@ -27,25 +37,28 @@
     </form>
     
     <!-- Existing dropdown results -->
-    <div x-show="isOpen" class="absolute w-full mt-1 bg-white border rounded-lg shadow-lg z-50 max-h-96 overflow-auto">
-        <!-- ... existing dropdown template ... -->
-        <template x-for="result in results" :key="result.id">
-            <a 
-                :href="`/products/${result.id}`"
-                class="block px-4 py-3 hover:bg-gray-100 transition-colors duration-200"
-                x-text="result.name"
-            >
-            </a>
-        </template>
+    <div x-show="isOpen" class="bor absolute w-full mt-1 bg-white border rounded-lg shadow-lg z-50 max-h-96 overflow-auto">
+        <div class="boder-b">
+            <template x-for="result in results" :key="result.id">
+                <a 
+                    :href="`/products/${result.id}`"
+                    class="block px-4 py-3 hover:bg-gray-100 transition-colors duration-200 bg-white/10"
+                    x-text="result.name"
+                >
+                </a>
+            </template>
+        </div>
+
         <!-- Add "View all results" link -->
-        <div class="border-t mt-2">
+        <div x-show="searchTerm.length > 2" class="border-t">
             <a 
                 href="{{ route('search.results') }}?q=" 
                 x-bind:href="`/search-results?q=${encodeURIComponent(searchTerm)}`"
-                class="block px-4 py-3 text-blue-600 hover:bg-blue-50 font-medium"
+                class="block px-4 py-3 text-slate-600 bg-slate-50 hover:bg-slate-200 font-medium"
             >
-                View all results for "<span x-text="${encodeURIComponent(searchTerm)}"></span>"
+                View all results for "<span x-text="searchTerm"></span>"
             </a>
         </div>
     </div>
+</div>
 </div>

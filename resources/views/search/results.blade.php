@@ -1,12 +1,12 @@
 <x-app-layout>
-<div class="container mx-auto px-4 py-4">
+<div class="container px-4 py-4 md:px-6 md:mx-auto">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Search Results for <span class="font-bold">"{{ $searchTerm }}"</span>
         </h2>
     </x-slot>
     @if($products->count())
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             @foreach($products as $product)
                 <x-product-card :product="$product"></x-product-card>
                 
