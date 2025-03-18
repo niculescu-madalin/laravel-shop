@@ -63,5 +63,6 @@ Route::get('admin', function() {
     return view('dashboard', compact('products', 'categories'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
+Route::get('/search-results', [ProductSearchController::class, 'showResults'])->name('search.results');
 Route::get('/search', [ProductSearchController::class, 'search'])->name('search');
+
