@@ -37,12 +37,12 @@ class="relative"
     </form>
     
     <!-- Existing dropdown results -->
-    <div x-show="isOpen" class="bor absolute w-full mt-1 bg-white border rounded-lg shadow-lg z-50 max-h-96 overflow-auto">
+    <div x-show="isOpen" class="absolute w-full mt-1 bg-white/50 backdrop-blur-xl border rounded-lg shadow-lg z-50 max-h-96 overflow-auto">
         <div class="boder-b">
             <template x-for="result in results" :key="result.id">
                 <a 
                     :href="`/products/${result.id}`"
-                    class="block px-4 py-3 hover:bg-gray-100 transition-colors duration-200 bg-white/10"
+                    class="block px-4 py-3 hover:bg-gray-200/50 transition-colors duration-200 "
                     x-text="result.name"
                 >
                 </a>
@@ -54,7 +54,7 @@ class="relative"
             <a 
                 href="{{ route('search.results') }}?q=" 
                 x-bind:href="`/search-results?q=${encodeURIComponent(searchTerm)}`"
-                class="block px-4 py-3 text-slate-600 bg-slate-50 hover:bg-slate-200 font-medium"
+                class="block px-4 py-3 text-slate-600 bg-slate-100/50 hover:bg-slate-200/50 font-medium"
             >
                 View all results for "<span x-text="searchTerm"></span>"
             </a>
