@@ -6,6 +6,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductSearchController;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Wishlist;
@@ -62,3 +63,5 @@ Route::get('admin', function() {
     return view('dashboard', compact('products', 'categories'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+Route::get('/search', [ProductSearchController::class, 'search'])->name('search');

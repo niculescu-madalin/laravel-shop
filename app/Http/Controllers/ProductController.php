@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
 
-
-
 class ProductController extends Controller
 {
     /**
