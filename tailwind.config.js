@@ -25,4 +25,13 @@ export default {
         forms,
         require('flowbite/plugin')
     ],
+
+    safelist: [
+        'sm:grid-cols-1',
+        'sm:grid-cols-2',
+        'md:grid-cols-2',
+        'md:grid-cols-3',
+        'lg:grid-cols-3',
+        'lg:grid-cols-4',
+    ],
 };
