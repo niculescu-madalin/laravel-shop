@@ -14,6 +14,7 @@ class="relative"
             type="text" 
             name="q"
             placeholder="Search products..."
+            autocomplete="off"
             x-model="searchTerm"
             @input.debounce.300ms="
                 if (searchTerm.length > 2) {
@@ -46,11 +47,12 @@ class="relative"
                     x-text="result.name"
                 >
                 </a>
+                
             </template>
         </div>
 
         <!-- Add "View all results" link -->
-        <div x-show="searchTerm.length > 2" class="border-t">
+        <div x-show="results.length > 0 || searchTerm.length > 2" class="border-t">
             <a 
                 href="{{ route('search.results') }}?q=" 
                 x-bind:href="`/search-results?q=${encodeURIComponent(searchTerm)}`"
