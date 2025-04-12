@@ -20,23 +20,21 @@
     </x-slot>
 
     <div class="gap-3 flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 m-4">
-        {{-- <div class="p-1 h-fit block max-w-sm rounded-lg shadow-sm bg-gray-800 border-gray-700">
-            <h5 class="mx-6 my-4 text-2xl font-bold tracking-tight text-white">Categories</h5>
-            <div class="px-6 py-2 rounded hover:bg-gray-700 font-normal text-gray-300"> 
-               All products
-            </div>
-            @foreach ($categories as $category)
-                <div class="px-6 py-2 rounded hover:bg-gray-700 font-normal text-gray-300"> 
-                    {{ $category->name }}
+        <div class="flex self-center w-full gap-4 ">
+            <!-- Sidebar -->
+            <x-sidebar :categories="$categories" />
+
+            <!-- Main Content -->
+            <div class="flex-1">
+                <div class="gap-4 grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3" 
+                    x-bind:class="open ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'">
+                    @foreach ($products as $product)
+                        <x-product-card :product="$product" />
+                    @endforeach
+                    <div>
+                        {{ $products->links() }}
+                    </div>
                 </div>
-            @endforeach
-        </div> --}}
-        <div class="gap-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        @foreach ($products as $product)
-          <x-product-card :product="$product" />
-        @endforeach
-            <div>
-                {{ $products->links() }}
             </div>
         </div>
     </div>
