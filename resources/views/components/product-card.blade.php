@@ -1,5 +1,5 @@
 @props(['product'])
-<div class="justify-between relative flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
+<div class="justify-between relative flex w-full flex-col overflow-hidden rounded-lg border-2 border-gray-200 bg-white hover:shadow-lg hover:shadow-slate-700/25">
     <a class="relative mx-3 mt-3 flex justify-center h-60 overflow-hidden rounded-xl" href="/products/{{ $product->id }}">
       <img class="object-cover" src="/{{ $product->image_path}}" alt="product image" />
     </a>
