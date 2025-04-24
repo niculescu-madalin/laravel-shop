@@ -20,13 +20,14 @@
     </x-slot>
 
     <div class="gap-3 flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 m-4">
-        <div class="flex self-center w-full gap-4 ">
+        <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-10 self-center w-full gap-4 ">
             <!-- Sidebar -->
-            <x-sidebar :categories="$categories" />
-
+            <div class="md:col-span-2">
+                <x-sidebar :categories="$categories"/>
+            </div>
             <!-- Main Content -->
-            <div class="flex-1">
-                <div class="gap-4 grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3" 
+            <div class="sm:col-span-2 md:col-span-4 lg:col-span-8">
+                <div class="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" 
                     x-bind:class="open ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'">
                     @foreach ($products as $product)
                         <x-product-card :product="$product" />
