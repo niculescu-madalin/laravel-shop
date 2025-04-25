@@ -1,10 +1,10 @@
 <div x-data="{ open: true }" class="flex flex-col gap-2">
     <div class="w-full" :class="{ 'hidden': !open }">
-        <div class="rounded-md  bg-gray-800 text-white h-full">
+        <div class="rounded-lg  bg-gray-800 text-white h-full">
             <form method="GET" action="{{ route('products.index') }}" id="filter" class="p-4 max-w-sm mx-auto">
                 @csrf
-                <label for="categories" class="block mb-2 text-sm font-medium text-white">Select an category</label>
-                <select id="categories" name="category" class="borders text-sm rounded-md block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
+                <label for="categories" class="block mb-2 text-md text-white">Select an category</label>
+                <select id="categories" name="category" class="borders text-sm rounded-md block w-full py-2 px-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
                     <option value=""> All Products </option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}"  {{ request('category') == $category->id ? 'selected' : '' }}>
@@ -13,14 +13,15 @@
                     @endforeach
                 </select>
             </form>
-            <button
-                x-show="open" 
-                class="w-full text-white font-semibold px-4 py-2 bg-sky-600 rounded-b-md hover:bg-sky-500"
-                form="filter"
-                type="submit">
-                <span>Filter</span>
-            </button>
+            
         </div>
+        <button
+            x-show="open" 
+            class="mt-2 w-full text-white font-semibold px-4 py-2 bg-slate-600 rounded-md hover:bg-slate-500"
+            form="filter"
+            type="submit">
+            <span>Filter</span>
+        </button>
         
     </div>
 
