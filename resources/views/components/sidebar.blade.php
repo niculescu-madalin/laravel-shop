@@ -1,10 +1,10 @@
 <div x-data="{ open: true }" class="flex flex-col gap-2">
     <div class="w-full" :class="{ 'hidden': !open }">
-        <div class="rounded-lg  bg-gray-800 text-white h-full">
-            <form method="GET" action="{{ route('products.index') }}" id="filter" class="p-4 max-w-sm mx-auto">
+        <div class="pt-4 pb-4 px-4 rounded-lg bg-gray-800 text-white h-full">
+            <form method="GET" action="{{ route('products.index') }}" id="filter" class="max-w-sm mx-auto">
                 @csrf
-                <label for="categories" class="block mb-2 text-md text-white">Select an category</label>
-                <select id="categories" name="category" class="borders text-sm rounded-md block w-full py-2 px-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
+                <label for="categories" class="block mb-2 text-sm">Select an category</label>
+                <select id="categories" name="category" class="borders text-sm rounded-md block w-full py-1.5 px-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
                     <option value=""> All Products </option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}"  {{ request('category') == $category->id ? 'selected' : '' }}>
@@ -12,6 +12,16 @@
                         </option>
                     @endforeach
                 </select>
+
+                <label for="price" class="mt-4 block mb-2 text-sm ">Price</label>
+                <div class="relative mb-6">
+                    <label for="labels-range-input" class="sr-only">Labels range</label>
+                    <input id="price" type="range" value="1000" min="100" max="5000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+                    <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">0</span>
+                    <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-1/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">500</span>
+                    <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-2/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">1000</span>
+                    <span class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">7000</span>
+                </div>
             </form>
             
         </div>
